@@ -1,5 +1,6 @@
 /*
 * */
+var ParseError = require('./ParseError');
 var utils = require('./utils');
 
 /*

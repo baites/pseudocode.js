@@ -5,12 +5,12 @@ build: lint build/pseudocode.min.js build/pseudocode.min.css
 setup: setup-katex
 	npm install
 	mkdir -p build
-	ln -s ../static/fonts build/fonts
+	ln -s ../static/katex/fonts build/fonts
 	ln -s ../static/katex build/katex
 
 setup-katex:
 	@rm -rf static/katex
-	cd static && wget https://github.com/Khan/KaTeX/releases/download/v0.2.0/katex.zip && unzip katex.zip
+	cd static && wget https://github.com/Khan/KaTeX/releases/download/v0.8.3/katex.zip && unzip katex.zip
 	@rm -rf static/katex.zip
 
 # Watch the changes to js source code and update the target js code
@@ -19,7 +19,7 @@ watch-js: pseudocode.js $(wildcard src/*.js)
 
 clean:
 	rm -rf build/*
-	ln -s ../static/fonts build/fonts
+	ln -s ../static/katex/fonts build/fonts
 
 zip: build/pseudocode-js.tar.gz build/pseudocode-js.zip
 

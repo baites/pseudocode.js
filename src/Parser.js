@@ -78,6 +78,7 @@
  * the structure of resulting program closely mirrors that of the grammar. *
  *
  */
+var ParseError = require('./ParseError');
 var utils = require('./utils');
 
 var ParseNode = function(type, val) {
