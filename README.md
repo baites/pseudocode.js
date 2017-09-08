@@ -1,28 +1,28 @@
 # Pseudocode.js - Beautiful pseudocode for the Web
 
-Pseudocode.js is a JavaScript library that typesets pseudocode beautifully to 
+Pseudocode.js is a JavaScript library that typesets pseudocode beautifully to
 HTML.
 
-* **Intuitive grammar**: Pseudocode.js takes a LaTeX-style input that supports 
-  the algorithmic constructs from LaTeX's algorithm packages. With or without 
-  LaTeX experience, a user should find the grammar fairly intuitive. 
-* **Print quality:** The HTML output produced by pseudocode.js is (almost) 
-  identical with the pretty algorithms printed on publications that are 
+* **Intuitive grammar**: Pseudocode.js takes a LaTeX-style input that supports
+  the algorithmic constructs from LaTeX's algorithm packages. With or without
+  LaTeX experience, a user should find the grammar fairly intuitive.
+* **Print quality:** The HTML output produced by pseudocode.js is (almost)
+  identical with the pretty algorithms printed on publications that are
   typeset by LaTeX.
-* **Math formula support:** Inserting math formulas in pseudocode.js is as easy 
+* **Math formula support:** Inserting math formulas in pseudocode.js is as easy
   as LaTeX. Just enclose math expression in `$...$` or `\(...\)`.
 
-It supports all modern browsers, including Chrome, Safari, 
+It supports all modern browsers, including Chrome, Safari,
 Firefox, Opera, and IE 8 - IE 11.
-        
+
 ## Demo
 Visit the [project website](http://www.tatetian.io/pseudocode.js) for demo.
 
 ## Usage
 
 ### Basics
-Download [pseudocode.js](https://github.com/tatetian/pseudocode.js/releases), 
-and host the files on your server. And then include the `js` and `css` files in 
+Download [pseudocode.js](https://github.com/tatetian/pseudocode.js/releases),
+and host the files on your server. And then include the `js` and `css` files in
 your HTML files:
 
 ```html
@@ -30,22 +30,22 @@ your HTML files:
 <script src="//path/to/pseudocode/pseudocode.min.js"></script>
 ```
 
-Pseudocode.js uses [KaTeX](https://github.com/Khan/KaTeX) to render math 
+Pseudocode.js uses [KaTeX](https://github.com/Khan/KaTeX) to render math
 formulas. So if you want to include any math formulas in
-your pseudocode, make sure that [KaTeX is 
+your pseudocode, make sure that [KaTeX is
 setup](https://github.com/Khan/KaTeX#usage).
 
 
 Assume the pseudocode to be rendered is in a `<pre>` DOM element:
 ```html
 <pre id="hello-world-code" style="display:hidden;">
-\begin{algorithmc}
+\begin{algorithmic}
 \PRINT \texttt{'hello world'}
-\end{algorithmc}
+\end{algorithmic}
 </pre>
 ```
 
-To render the above code as a HTML element and append to a parent DOM element, 
+To render the above code as a HTML element and append to a parent DOM element,
 call `pseudocode.render`:
 ```js
 var code = document.getElementById("hello-world-code").textContent;
@@ -67,7 +67,7 @@ console.log(htmlStr);
 ```
 
 ### Example
-To give you a sense of the grammar for pseudocode, here is an example that 
+To give you a sense of the grammar for pseudocode, here is an example that
 illustrates a quicksort algorithm:
 ```tex
 % This quicksort algorithm is extracted from Chapter 7, Introduction to Algorithms (3rd edition)
@@ -75,7 +75,7 @@ illustrates a quicksort algorithm:
 \caption{Quicksort}
 \begin{algorithmic}
 \PROCEDURE{Quicksort}{$A, p, r$}
-    \IF{$p < r$} 
+    \IF{$p < r$}
         \STATE $q = $ \CALL{Partition}{$A, p, r$}
         \STATE \CALL{Quicksort}{$A, p, q - 1$}
         \STATE \CALL{Quicksort}{$A, q + 1, r$}
@@ -98,11 +98,11 @@ illustrates a quicksort algorithm:
 ```
 
 ### Grammar
-There are several packages for typesetting algorithms in LaTeX, among which 
+There are several packages for typesetting algorithms in LaTeX, among which
 [`algorithmic`](http://mirror.ctan.org/tex-archive/macros/latex/contrib/algorithms/algorithms.pdf)
-package is the most simple and intuitive, and is chosen by IEEE in its 
-[LaTeX template file](http://www.ctan.org/tex-archive/macros/latex/contrib/IEEEtran). 
-The grammar of pseudocode.js is mostly compatible with `algorithmic` package with 
+package is the most simple and intuitive, and is chosen by IEEE in its
+[LaTeX template file](http://www.ctan.org/tex-archive/macros/latex/contrib/IEEEtran).
+The grammar of pseudocode.js is mostly compatible with `algorithmic` package with
 a few improvement to make it even more easier to use.
 
 Commands for typesetting algorithms must be enclosed in an `algorithmic` environment:
@@ -117,7 +117,7 @@ Commands for typesetting algorithms must be enclosed in an `algorithmic` environ
 \end{algorithmic}
 ```
 
-`<block>` can include zero or more `<statement>`, `<control>`,  `<comment>` 
+`<block>` can include zero or more `<statement>`, `<control>`,  `<comment>`
 and `<function>`:
 ```tex
 # A <statement> can be:
@@ -142,7 +142,7 @@ and `<function>`:
 # A <function> can by defined by either \FUNCTION or \PROCEDURE
 # Both are exactly the same
 \FUNCTION{<name>}{<params>}
-    <block> 
+    <block>
 \ENDFUNCTION
 
 # A <comment> is:
@@ -162,7 +162,7 @@ $i \gets i + 1$
 # Keywords
 \AND, \OR, \XOR, \NOT, \TO, \TRUE, \FALSE
 # LaTeX's sizing commands
-\tiny, \scriptsize, \footnotesize, \small \normalsize, \large, \Large, \LARGE, 
+\tiny, \scriptsize, \footnotesize, \small \normalsize, \large, \Large, \LARGE,
 \huge, \HUGE
 # LaTeX's font declarations
 \rmfamily, \sffamily, \ttfamily
@@ -177,9 +177,9 @@ $i \gets i + 1$
 normal text {\small the size gets smaller} back to normal again
 ```
 
-Note that although pseudocode.js recognizes some LaTeX commands, it is by no 
+Note that although pseudocode.js recognizes some LaTeX commands, it is by no
 means a full-featured LaTeX implementation in JavaScript.
-It only support a subset of LaTeX commands that are most relevant to 
+It only support a subset of LaTeX commands that are most relevant to
 typesetting algorithms.
 
 
@@ -194,8 +194,8 @@ To display the caption of an algorithm, use `algorithm` environment as a 'float'
 ```
 
 ### Options
-Function `pseudocode.renderToString` and `pseudocode.renderToString` can accept 
-an option as the last argument. 
+Function `pseudocode.renderToString` and `pseudocode.renderToString` can accept
+an option as the last argument.
 
  * `indentSize`: The indent size of inside a control block, e.g. if, for,
         etc. The unit must be in 'em'.
@@ -219,12 +219,15 @@ var DEFAULT_OPTIONS = {
 };
 ```
 ## Author
-Tate Tian ([@tatetian](https://github.com/tatetian)) creates pseudocode.js. Any 
-suggestions and bug reports are welcome.
+Victor Bazterra ([@baites](https://github.com/baites)) fork from pseudocde
+project by Tate Tian ([@tatetian](https://github.com/tatetian)). I have done
+only minimal changes, dependency updates and minor bug fixes.
+
+Any suggestions and bug reports are welcome.
 
 ## Acknowledgement
-Pseudocode.js is partially inspired by [KaTeX](http://khan.github.io/KaTeX/) and 
-relies on it to render math formulas.
+Thanks Tate Tian ([@tatetian](https://github.com/tatetian)) for the great
+project.
+Pseudocode.js is partially inspired by [KaTeX](http://khan.github.io/KaTeX/) and relies on it to render math formulas.
 Thanks Emily Eisenberg([@xymostech](https://github.com/xymostech))
 and other contributers for building such a wonderful project.
-
